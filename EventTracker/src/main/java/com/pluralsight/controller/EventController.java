@@ -1,0 +1,43 @@
+package com.pluralsight.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
+
+import com.pluralsight.model.Event;
+
+@Controller
+@SessionAttributes("event")
+public class EventController {
+
+	
+	@RequestMapping(value="/event",method=RequestMethod.GET)
+	public String displayEventPage(Model model){
+		Event event=new Event();
+		model.addAttribute("event", event);
+		return "event";
+	}
+	@RequestMapping(value="/event",method=RequestMethod.POST)
+	public String displayEventPage2(@ModelAttribute("event") Event event){
+		System.out.println(event);
+		/*model.addAttribute("event", event);
+		model.addAttribute("string","Hello shubham");
+		*/
+		return "forward:tester.html";
+		
+	}
+	@RequestMapping(value="/tester",method=RequestMethod.GET)
+	public String processEvent()
+	{
+		return "tester";
+	}
+	@RequestMapping(value="/tester",method=RequestMethod.POST)
+	public String processEventPost()
+	{	
+		return "tester";
+	}
+	
+}
